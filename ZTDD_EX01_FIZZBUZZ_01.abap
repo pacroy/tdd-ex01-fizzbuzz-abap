@@ -23,7 +23,11 @@ ENDCLASS.
 CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD first_test.
-    cl_abap_unit_assert=>fail( 'Implement your first test here' ).
+    DATA(lo_fb) = NEW lcl_fizzbuzz01( ).  "Arrange
+    DATA(lv_actual) = lo_fb->say( 1 ).    "Act
+    cl_abap_unit_assert=>assert_equals(   "Assert
+      exp = `1`
+      act = lv_actual ).
   ENDMETHOD.
 
 ENDCLASS.
@@ -31,3 +35,4 @@ ENDCLASS.
 *----------------------------------------------------------------------*
 * PRODUCTION CODE
 *----------------------------------------------------------------------*
+
