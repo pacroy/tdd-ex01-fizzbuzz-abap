@@ -8,6 +8,24 @@
 REPORT ztdd_ex01_fizzubuzz_01.
 
 *----------------------------------------------------------------------*
+* PRODUCTION CODE
+*----------------------------------------------------------------------*
+CLASS lcl_fizzbuzz01 DEFINITION.
+  PUBLIC SECTION.
+    METHODS say
+      IMPORTING iv_input         TYPE i
+      RETURNING VALUE(rv_output) TYPE string.
+ENDCLASS.
+
+CLASS lcl_fizzbuzz01 IMPLEMENTATION.
+
+  METHOD say.
+    rv_output = `1`.
+  ENDMETHOD.
+
+ENDCLASS.
+
+*----------------------------------------------------------------------*
 * TEST CODE
 *----------------------------------------------------------------------*
 CLASS ltcl_fizzbuzz01 DEFINITION FINAL FOR TESTING
@@ -31,8 +49,3 @@ CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
   ENDMETHOD.
 
 ENDCLASS.
-
-*----------------------------------------------------------------------*
-* PRODUCTION CODE
-*----------------------------------------------------------------------*
-
