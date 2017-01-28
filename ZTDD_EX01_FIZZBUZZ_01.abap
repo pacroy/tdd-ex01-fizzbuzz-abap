@@ -16,41 +16,38 @@ CLASS lcl_fizzbuzz01 DEFINITION.
       IMPORTING iv_input         TYPE i
       RETURNING VALUE(rv_output) TYPE string.
   PRIVATE SECTION.
-    METHODS isFizz
+    METHODS isfizz
       IMPORTING
-        iv_input TYPE i
+        iv_input        TYPE i
       RETURNING
-        value(r_result) TYPE abap_bool.
-    METHODS isBuzz
+        VALUE(r_result) TYPE abap_bool.
+    METHODS isbuzz
       IMPORTING
-        iv_input TYPE i
+        iv_input        TYPE i
       RETURNING
-        value(r_result) TYPE abap_bool.
+        VALUE(r_result) TYPE abap_bool.
 ENDCLASS.
 
 CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD say.
-    IF ( isFizz( iv_input ) = abap_true ) AND ( isBuzz( iv_input ) = abap_true ).
-      rv_output = `Fizz` && `Buzz`.
-      RETURN.
-    ENDIF.
-    IF isBuzz( iv_input ) = abap_true.
-      rv_output = `Buzz`.
-      RETURN.
-    ENDIF.
-    IF isFizz( iv_input ) = abap_true.
+    CLEAR rv_output.
+    IF isfizz( iv_input ) = abap_true.
       rv_output = `Fizz`.
-      RETURN.
     ENDIF.
-    rv_output = |{ iv_input }|.
+    IF isbuzz( iv_input ) = abap_true.
+      rv_output = rv_output && `Buzz`.
+    ENDIF.
+    IF rv_output IS INITIAL.
+      rv_output = |{ iv_input }|.
+    ENDIF.
   ENDMETHOD.
 
-  METHOD isBuzz.
+  METHOD isbuzz.
     r_result = boolc( iv_input MOD 5 = 0 ).
   ENDMETHOD.
 
-  METHOD isFizz.
+  METHOD isfizz.
     r_result = boolc( iv_input MOD 3 = 0 ).
   ENDMETHOD.
 
