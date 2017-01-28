@@ -115,7 +115,7 @@ ENDCLASS.
 *----------------------------------------------------------------------*
 * TEST CODE
 *----------------------------------------------------------------------*
-CLASS ltcl_fizzbuzz01 DEFINITION FINAL FOR TESTING
+CLASS ltcl_fizzbuzz03 DEFINITION FINAL FOR TESTING
   DURATION SHORT
   RISK LEVEL HARMLESS.
 
@@ -135,7 +135,7 @@ CLASS ltcl_fizzbuzz01 DEFINITION FINAL FOR TESTING
 ENDCLASS.
 
 
-CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
+CLASS ltcl_fizzbuzz03 IMPLEMENTATION.
 
   METHOD get_new_fizzbuzz01.
     DATA lt_rule TYPE lcl_fizzbuzz03=>tt_rule.
