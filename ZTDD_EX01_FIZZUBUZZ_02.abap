@@ -68,8 +68,8 @@ CLASS ltcl_fizzbuzz01 DEFINITION FINAL FOR TESTING
       get_number_when_not_multiple FOR TESTING RAISING cx_static_check,
       get_fizz_when_multiple_of_3 FOR TESTING RAISING cx_static_check,
       get_buzz_when_multiple_of_5 FOR TESTING RAISING cx_static_check,
-      get_fizzbuzz_on_multiple_of_15 FOR TESTING RAISING cx_static_check,
-      get_wow_when_multiple_of_7 FOR TESTING RAISING cx_static_check.
+      get_fizzbuzz_on_multiple_of_15 FOR TESTING RAISING cx_static_check.
+*      get_wow_when_multiple_of_7 FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
@@ -119,11 +119,11 @@ CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
       act = lo_fb->say( 30 ) ).
   ENDMETHOD.
 
-  METHOD get_wow_when_multiple_of_7.
-    DATA(lo_fb) = get_new_fizzbuzz01( ).
-    cl_abap_unit_assert=>assert_equals(
-      exp = `Wow`
-      act = lo_fb->say( 7 ) ).
-  ENDMETHOD.
+*  METHOD get_wow_when_multiple_of_7.
+*    DATA(lo_fb) = get_new_fizzbuzz01( ).
+*    cl_abap_unit_assert=>assert_equals(
+*      exp = `Wow`
+*      act = lo_fb->say( 7 ) ).
+*  ENDMETHOD.
 
 ENDCLASS.
