@@ -286,7 +286,8 @@ CLASS ltcl_fizzbuzz03 DEFINITION FINAL FOR TESTING
       get_thousand_when_mult_of_21 FOR TESTING RAISING cx_static_check,
 *      get_buzzwow_when_mult_of_35 FOR TESTING RAISING cx_static_check,
       get_foresee_when_mult_of_35 FOR TESTING RAISING cx_static_check,
-      get_fizzbuzzwow_when_mof_105 FOR TESTING RAISING cx_static_check.
+*      get_fizzbuzzwow_when_mof_105 FOR TESTING RAISING cx_static_check.
+      get_tfs_when_mof_105 FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
@@ -367,15 +368,15 @@ CLASS ltcl_fizzbuzz03 IMPLEMENTATION.
 *      act = lo_fb->say( 70 ) ).
 *  ENDMETHOD.
 
-  METHOD get_fizzbuzzwow_when_mof_105.
-    DATA(lo_fb) = get_new_fizzbuzz01( ).
-    cl_abap_unit_assert=>assert_equals(
-      exp = `FizzBuzzWow`
-      act = lo_fb->say( 105 ) ).
-    cl_abap_unit_assert=>assert_equals(
-      exp = `FizzBuzzWow`
-      act = lo_fb->say( 210 ) ).
-  ENDMETHOD.
+*  METHOD get_fizzbuzzwow_when_mof_105.
+*    DATA(lo_fb) = get_new_fizzbuzz01( ).
+*    cl_abap_unit_assert=>assert_equals(
+*      exp = `FizzBuzzWow`
+*      act = lo_fb->say( 105 ) ).
+*    cl_abap_unit_assert=>assert_equals(
+*      exp = `FizzBuzzWow`
+*      act = lo_fb->say( 210 ) ).
+*  ENDMETHOD.
 
 *  METHOD get_fizzwow_when_mult_of_21.
 *    DATA(lo_fb) = get_new_fizzbuzz01( ).
@@ -415,6 +416,16 @@ CLASS ltcl_fizzbuzz03 IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals(
       exp = `Foresee`
       act = lo_fb->say( 70 ) ).
+  ENDMETHOD.
+
+  METHOD get_tfs_when_mof_105.
+    DATA(lo_fb) = get_new_fizzbuzz01( ).
+    cl_abap_unit_assert=>assert_equals(
+      exp = `TFS`
+      act = lo_fb->say( 105 ) ).
+    cl_abap_unit_assert=>assert_equals(
+      exp = `TFS`
+      act = lo_fb->say( 210 ) ).
   ENDMETHOD.
 
 ENDCLASS.
