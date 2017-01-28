@@ -37,6 +37,9 @@ CLASS ltcl_fizzbuzz01 DEFINITION FINAL FOR TESTING
   RISK LEVEL HARMLESS.
 
   PRIVATE SECTION.
+    METHODS get_new_fizzbuzz01
+      RETURNING
+        VALUE(r_result) TYPE REF TO lcl_fizzbuzz01.
     METHODS:
       get_number_when_not_multiple FOR TESTING RAISING cx_static_check,
       get_fizz_when_multiple_of_3 FOR TESTING RAISING cx_static_check.
@@ -45,8 +48,12 @@ ENDCLASS.
 
 CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
 
+  METHOD get_new_fizzbuzz01.
+    r_result = NEW lcl_fizzbuzz01( ).
+  ENDMETHOD.
+
   METHOD get_number_when_not_multiple.
-    DATA(lo_fb) = NEW lcl_fizzbuzz01( ).
+    DATA(lo_fb) = get_new_fizzbuzz01( ).
     cl_abap_unit_assert=>assert_equals(
       exp = `1`
       act = lo_fb->say( 1 ) ).
@@ -56,7 +63,7 @@ CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD get_fizz_when_multiple_of_3.
-    DATA(lo_fb) = NEW lcl_fizzbuzz01( ).
+    DATA(lo_fb) = get_new_fizzbuzz01( ).
     cl_abap_unit_assert=>assert_equals(
       exp = `Fizz`
       act = lo_fb->say( 3 ) ).
