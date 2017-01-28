@@ -78,6 +78,82 @@ CLASS lcl_wowrule IMPLEMENTATION.
 
 ENDCLASS.
 
+CLASS lcl_fizzbuzzrule DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_rule.
+    ALIASES isvalid FOR lif_rule~isvalid.
+    ALIASES say FOR lif_rule~say.
+ENDCLASS.
+
+CLASS lcl_fizzbuzzrule IMPLEMENTATION.
+
+  METHOD lif_rule~isvalid.
+    r_result = boolc( iv_input MOD 15 = 0 ).
+  ENDMETHOD.
+
+  METHOD lif_rule~say.
+    rv_output = `FizzBuzz`.
+  ENDMETHOD.
+
+ENDCLASS.
+
+CLASS lcl_fizzwowrule DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_rule.
+    ALIASES isvalid FOR lif_rule~isvalid.
+    ALIASES say FOR lif_rule~say.
+ENDCLASS.
+
+CLASS lcl_fizzwowrule IMPLEMENTATION.
+
+  METHOD lif_rule~isvalid.
+    r_result = boolc( iv_input MOD 21 = 0 ).
+  ENDMETHOD.
+
+  METHOD lif_rule~say.
+    rv_output = `FizzWow`.
+  ENDMETHOD.
+
+ENDCLASS.
+
+CLASS lcl_buzzwowrule DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_rule.
+    ALIASES isvalid FOR lif_rule~isvalid.
+    ALIASES say FOR lif_rule~say.
+ENDCLASS.
+
+CLASS lcl_buzzwowrule IMPLEMENTATION.
+
+  METHOD lif_rule~isvalid.
+    r_result = boolc( iv_input MOD 35 = 0 ).
+  ENDMETHOD.
+
+  METHOD lif_rule~say.
+    rv_output = `BuzzWow`.
+  ENDMETHOD.
+
+ENDCLASS.
+
+CLASS lcl_fizzbuzzwowrule DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_rule.
+    ALIASES isvalid FOR lif_rule~isvalid.
+    ALIASES say FOR lif_rule~say.
+ENDCLASS.
+
+CLASS lcl_fizzbuzzwowrule IMPLEMENTATION.
+
+  METHOD lif_rule~isvalid.
+    r_result = boolc( iv_input MOD 105 = 0 ).
+  ENDMETHOD.
+
+  METHOD lif_rule~say.
+    rv_output = `FizzBuzzWow`.
+  ENDMETHOD.
+
+ENDCLASS.
+
 CLASS lcl_fizzbuzz03 DEFINITION.
   PUBLIC SECTION.
     TYPES: tt_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
@@ -98,7 +174,8 @@ CLASS lcl_fizzbuzz03 IMPLEMENTATION.
     CLEAR rv_output.
     LOOP AT at_rule INTO DATA(lo_rule).
       IF lo_rule->isvalid( iv_input ) = abap_true.
-        rv_output = rv_output && lo_rule->say( ).
+        rv_output = lo_rule->say( ).
+        RETURN.
       ENDIF.
     ENDLOOP.
     IF rv_output IS INITIAL.
@@ -141,9 +218,13 @@ CLASS ltcl_fizzbuzz03 IMPLEMENTATION.
     DATA lt_rule TYPE lcl_fizzbuzz03=>tt_rule.
 
     r_result = NEW lcl_fizzbuzz03( ).
-    lt_rule = VALUE #( ( NEW lcl_fizzrule( ) )
-                       ( NEW lcl_buzzrule( ) )
-                       ( NEW lcl_wowrule( ) ) ).
+    lt_rule = VALUE #(  ( NEW lcl_fizzbuzzwowrule( ) )
+                        ( NEW lcl_buzzwowrule( ) )
+                        ( NEW lcl_fizzwowrule( ) )
+                        ( NEW lcl_fizzbuzzrule( ) )
+                        ( NEW lcl_wowrule( ) )
+                        ( NEW lcl_buzzrule( ) )
+                        ( NEW lcl_fizzrule( ) ) ).
     r_result->set_rule( lt_rule ).
   ENDMETHOD.
 
