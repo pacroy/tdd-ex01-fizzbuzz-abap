@@ -61,9 +61,14 @@ ENDCLASS.
 
 CLASS lcl_fizzbuzz01 DEFINITION.
   PUBLIC SECTION.
+    TYPES: tt_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
+
     METHODS say
       IMPORTING iv_input         TYPE i
       RETURNING VALUE(rv_output) TYPE string.
+    METHODS set_rule
+      IMPORTING it_rule TYPE tt_rule.
+
   PRIVATE SECTION.
     DATA at_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
 ENDCLASS.
@@ -71,9 +76,6 @@ ENDCLASS.
 CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD say.
-    at_rule = VALUE #( ( NEW lcl_fizzrule( ) )
-                       ( NEW lcl_buzzrule( ) ) ).
-
     CLEAR rv_output.
     LOOP AT at_rule INTO DATA(lo_rule).
       IF lo_rule->isvalid( iv_input ) = abap_true.
@@ -83,6 +85,10 @@ CLASS lcl_fizzbuzz01 IMPLEMENTATION.
     IF rv_output IS INITIAL.
       rv_output = |{ iv_input }|.
     ENDIF.
+  ENDMETHOD.
+
+  METHOD set_rule.
+    at_rule = it_rule.
   ENDMETHOD.
 
 ENDCLASS.
@@ -110,7 +116,12 @@ ENDCLASS.
 CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD get_new_fizzbuzz01.
+    DATA lt_rule TYPE lcl_fizzbuzz01=>tt_rule.
+
     r_result = NEW lcl_fizzbuzz01( ).
+    lt_rule = VALUE #( ( NEW lcl_fizzrule( ) )
+                       ( NEW lcl_buzzrule( ) ) ).
+    r_result->set_rule( lt_rule ).
   ENDMETHOD.
 
   METHOD get_number_when_not_multiple.
