@@ -16,12 +16,12 @@ CLASS lcl_fizzbuzz01 DEFINITION.
       IMPORTING iv_input         TYPE i
       RETURNING VALUE(rv_output) TYPE string.
   PRIVATE SECTION.
-    METHODS isfizz
+    METHODS isfizzrule
       IMPORTING
         iv_input        TYPE i
       RETURNING
         VALUE(r_result) TYPE abap_bool.
-    METHODS isbuzz
+    METHODS isbuzzrule
       IMPORTING
         iv_input        TYPE i
       RETURNING
@@ -32,22 +32,22 @@ CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD say.
     CLEAR rv_output.
-    IF isfizz( iv_input ) = abap_true.
-      rv_output = `Fizz`.
+    IF isfizzrule( iv_input ) = abap_true.
+      rv_output = rv_output && `Fizz`.
     ENDIF.
-    IF isbuzz( iv_input ) = abap_true.
+    IF isbuzzrule( iv_input ) = abap_true.
       rv_output = rv_output && `Buzz`.
     ENDIF.
-    IF rv_output IS INITIAL.
+    IF rv_output is INITIAL.
       rv_output = |{ iv_input }|.
     ENDIF.
   ENDMETHOD.
 
-  METHOD isbuzz.
+  METHOD isbuzzrule.
     r_result = boolc( iv_input MOD 5 = 0 ).
   ENDMETHOD.
 
-  METHOD isfizz.
+  METHOD isfizzrule.
     r_result = boolc( iv_input MOD 3 = 0 ).
   ENDMETHOD.
 
