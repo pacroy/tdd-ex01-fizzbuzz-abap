@@ -222,7 +222,8 @@ CLASS ltcl_fizzbuzz03 DEFINITION FINAL FOR TESTING
       get_number_when_not_multiple FOR TESTING RAISING cx_static_check,
       get_fizz_when_multiple_of_3 FOR TESTING RAISING cx_static_check,
       get_buzz_when_multiple_of_5 FOR TESTING RAISING cx_static_check,
-      get_fizzbuzz_on_multiple_of_15 FOR TESTING RAISING cx_static_check,
+*      get_fizzbuzz_on_multiple_of_15 FOR TESTING RAISING cx_static_check,
+      get_transfer_on_multiple_of_15 FOR TESTING RAISING cx_static_check,
       get_wow_when_multiple_of_7 FOR TESTING RAISING cx_static_check,
       get_fizzwow_when_mult_of_21 FOR TESTING RAISING cx_static_check,
       get_buzzwow_when_mult_of_35 FOR TESTING RAISING cx_static_check,
@@ -277,15 +278,15 @@ CLASS ltcl_fizzbuzz03 IMPLEMENTATION.
       act = lo_fb->say( 10 ) ).
   ENDMETHOD.
 
-  METHOD get_fizzbuzz_on_multiple_of_15.
-    DATA(lo_fb) = get_new_fizzbuzz01( ).
-    cl_abap_unit_assert=>assert_equals(
-      exp = `FizzBuzz`
-      act = lo_fb->say( 15 ) ).
-    cl_abap_unit_assert=>assert_equals(
-      exp = `FizzBuzz`
-      act = lo_fb->say( 30 ) ).
-  ENDMETHOD.
+*  METHOD get_fizzbuzz_on_multiple_of_15.
+*    DATA(lo_fb) = get_new_fizzbuzz01( ).
+*    cl_abap_unit_assert=>assert_equals(
+*      exp = `FizzBuzz`
+*      act = lo_fb->say( 15 ) ).
+*    cl_abap_unit_assert=>assert_equals(
+*      exp = `FizzBuzz`
+*      act = lo_fb->say( 30 ) ).
+*  ENDMETHOD.
 
   METHOD get_wow_when_multiple_of_7.
     DATA(lo_fb) = get_new_fizzbuzz01( ).
@@ -325,6 +326,16 @@ CLASS ltcl_fizzbuzz03 IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals(
       exp = `FizzWow`
       act = lo_fb->say( 42 ) ).
+  ENDMETHOD.
+
+  METHOD get_transfer_on_multiple_of_15.
+    DATA(lo_fb) = get_new_fizzbuzz01( ).
+    cl_abap_unit_assert=>assert_equals(
+      exp = `Transfer`
+      act = lo_fb->say( 15 ) ).
+    cl_abap_unit_assert=>assert_equals(
+      exp = `Transfer`
+      act = lo_fb->say( 30 ) ).
   ENDMETHOD.
 
 ENDCLASS.
