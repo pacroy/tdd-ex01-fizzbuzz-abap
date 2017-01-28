@@ -15,24 +15,43 @@ CLASS lcl_fizzbuzz01 DEFINITION.
     METHODS say
       IMPORTING iv_input         TYPE i
       RETURNING VALUE(rv_output) TYPE string.
+  PRIVATE SECTION.
+    METHODS isFizz
+      IMPORTING
+        iv_input TYPE i
+      RETURNING
+        value(r_result) TYPE abap_bool.
+    METHODS isBuzz
+      IMPORTING
+        iv_input TYPE i
+      RETURNING
+        value(r_result) TYPE abap_bool.
 ENDCLASS.
 
 CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD say.
-    IF ( iv_input MOD 3 = 0 ) AND ( iv_input MOD 5 = 0 ).
+    IF ( isFizz( iv_input ) = abap_true ) AND ( isBuzz( iv_input ) = abap_true ).
       rv_output = `FizzBuzz`.
       RETURN.
     ENDIF.
-    IF iv_input MOD 5 = 0.
+    IF isBuzz( iv_input ) = abap_true.
       rv_output = `Buzz`.
       RETURN.
     ENDIF.
-    IF iv_input MOD 3 = 0.
+    IF isFizz( iv_input ) = abap_true.
       rv_output = `Fizz`.
       RETURN.
     ENDIF.
     rv_output = |{ iv_input }|.
+  ENDMETHOD.
+
+  METHOD isBuzz.
+    r_result = boolc( iv_input MOD 5 = 0 ).
+  ENDMETHOD.
+
+  METHOD isFizz.
+    r_result = boolc( iv_input MOD 3 = 0 ).
   ENDMETHOD.
 
 ENDCLASS.
