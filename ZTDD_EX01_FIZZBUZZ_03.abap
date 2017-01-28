@@ -213,6 +213,25 @@ CLASS lcl_thousandrule IMPLEMENTATION.
 
 ENDCLASS.
 
+CLASS lcl_foreseerule DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_rule.
+    ALIASES isvalid FOR lif_rule~isvalid.
+    ALIASES say FOR lif_rule~say.
+ENDCLASS.
+
+CLASS lcl_foreseerule IMPLEMENTATION.
+
+  METHOD lif_rule~isvalid.
+    r_result = boolc( iv_input MOD 35 = 0 ).
+  ENDMETHOD.
+
+  METHOD lif_rule~say.
+    rv_output = `Foresee`.
+  ENDMETHOD.
+
+ENDCLASS.
+
 CLASS lcl_fizzbuzz03 DEFINITION.
   PUBLIC SECTION.
     TYPES: tt_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
@@ -278,7 +297,7 @@ CLASS ltcl_fizzbuzz03 IMPLEMENTATION.
 
     r_result = NEW lcl_fizzbuzz03( ).
     lt_rule = VALUE #(  ( NEW lcl_fizzbuzzwowrule( ) )
-                        ( NEW lcl_buzzwowrule( ) )
+                        ( NEW lcl_foreseerule( ) )
                         ( NEW lcl_thousandrule( ) )
                         ( NEW lcl_transferrule( ) )
                         ( NEW lcl_wowrule( ) )
