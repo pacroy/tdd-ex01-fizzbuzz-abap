@@ -1,11 +1,11 @@
 *&---------------------------------------------------------------------*
-*& Report  ztdd_ex01_fizzubuzz_02
+*& Report  ztdd_ex01_fizzbuzz_03
 *&
 *&---------------------------------------------------------------------*
 *&
 *&
 *&---------------------------------------------------------------------*
-REPORT ztdd_ex01_fizzubuzz_02.
+REPORT ztdd_ex01_fizzbuzz_03.
 
 *----------------------------------------------------------------------*
 * PRODUCTION CODE
@@ -78,7 +78,7 @@ CLASS lcl_wowrule IMPLEMENTATION.
 
 ENDCLASS.
 
-CLASS lcl_fizzbuzz02 DEFINITION.
+CLASS lcl_fizzbuzz03 DEFINITION.
   PUBLIC SECTION.
     TYPES: tt_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
 
@@ -92,7 +92,7 @@ CLASS lcl_fizzbuzz02 DEFINITION.
     DATA at_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
 ENDCLASS.
 
-CLASS lcl_fizzbuzz02 IMPLEMENTATION.
+CLASS lcl_fizzbuzz03 IMPLEMENTATION.
 
   METHOD say.
     CLEAR rv_output.
@@ -122,7 +122,7 @@ CLASS ltcl_fizzbuzz01 DEFINITION FINAL FOR TESTING
   PRIVATE SECTION.
     METHODS get_new_fizzbuzz01
       RETURNING
-        VALUE(r_result) TYPE REF TO lcl_fizzbuzz02.
+        VALUE(r_result) TYPE REF TO lcl_fizzbuzz03.
     METHODS:
       get_number_when_not_multiple FOR TESTING RAISING cx_static_check,
       get_fizz_when_multiple_of_3 FOR TESTING RAISING cx_static_check,
@@ -138,9 +138,9 @@ ENDCLASS.
 CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD get_new_fizzbuzz01.
-    DATA lt_rule TYPE lcl_fizzbuzz02=>tt_rule.
+    DATA lt_rule TYPE lcl_fizzbuzz03=>tt_rule.
 
-    r_result = NEW lcl_fizzbuzz02( ).
+    r_result = NEW lcl_fizzbuzz03( ).
     lt_rule = VALUE #( ( NEW lcl_fizzrule( ) )
                        ( NEW lcl_buzzrule( ) )
                        ( NEW lcl_wowrule( ) ) ).
