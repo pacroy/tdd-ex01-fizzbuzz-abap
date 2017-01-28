@@ -41,10 +41,13 @@ ENDCLASS.
 CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD first_test.
-    DATA(lo_fb) = NEW lcl_fizzbuzz01( ).  "Arrange
-    cl_abap_unit_assert=>assert_equals(   "Act & Assert
+    DATA(lo_fb) = NEW lcl_fizzbuzz01( ).
+    cl_abap_unit_assert=>assert_equals(
       exp = `1`
       act = lo_fb->say( 1 ) ).
+    cl_abap_unit_assert=>assert_equals(
+      exp = `2`
+      act = lo_fb->say( 2 ) ).
   ENDMETHOD.
 
 ENDCLASS.
