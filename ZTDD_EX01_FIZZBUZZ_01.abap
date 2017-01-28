@@ -20,7 +20,7 @@ ENDCLASS.
 CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD say.
-    IF iv_input = 6.
+    IF iv_input = 3 * 2.
       rv_output = `Fizz`.
       RETURN.
     ENDIF.
