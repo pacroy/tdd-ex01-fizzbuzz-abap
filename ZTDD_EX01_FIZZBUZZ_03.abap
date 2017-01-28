@@ -232,6 +232,25 @@ CLASS lcl_foreseerule IMPLEMENTATION.
 
 ENDCLASS.
 
+CLASS lcl_tfsrule DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_rule.
+    ALIASES isvalid FOR lif_rule~isvalid.
+    ALIASES say FOR lif_rule~say.
+ENDCLASS.
+
+CLASS lcl_tfsrule IMPLEMENTATION.
+
+  METHOD lif_rule~isvalid.
+    r_result = boolc( iv_input MOD 105 = 0 ).
+  ENDMETHOD.
+
+  METHOD lif_rule~say.
+    rv_output = `TFS`.
+  ENDMETHOD.
+
+ENDCLASS.
+
 CLASS lcl_fizzbuzz03 DEFINITION.
   PUBLIC SECTION.
     TYPES: tt_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
@@ -297,7 +316,7 @@ CLASS ltcl_fizzbuzz03 IMPLEMENTATION.
     DATA lt_rule TYPE lcl_fizzbuzz03=>tt_rule.
 
     r_result = NEW lcl_fizzbuzz03( ).
-    lt_rule = VALUE #(  ( NEW lcl_fizzbuzzwowrule( ) )
+    lt_rule = VALUE #(  ( NEW lcl_tfsrule( ) )
                         ( NEW lcl_foreseerule( ) )
                         ( NEW lcl_thousandrule( ) )
                         ( NEW lcl_transferrule( ) )
