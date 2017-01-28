@@ -64,17 +64,18 @@ CLASS lcl_fizzbuzz01 DEFINITION.
     METHODS say
       IMPORTING iv_input         TYPE i
       RETURNING VALUE(rv_output) TYPE string.
+  PRIVATE SECTION.
+    DATA at_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
 ENDCLASS.
 
 CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD say.
-    DATA lt_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
-    lt_rule = VALUE #( ( NEW lcl_fizzrule( ) )
+    at_rule = VALUE #( ( NEW lcl_fizzrule( ) )
                        ( NEW lcl_buzzrule( ) ) ).
 
     CLEAR rv_output.
-    LOOP AT lt_rule INTO DATA(lo_rule).
+    LOOP AT at_rule INTO DATA(lo_rule).
       IF lo_rule->isvalid( iv_input ) = abap_true.
         rv_output = rv_output && lo_rule->say( ).
       ENDIF.
