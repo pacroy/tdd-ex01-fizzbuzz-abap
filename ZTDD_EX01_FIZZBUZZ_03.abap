@@ -194,6 +194,25 @@ CLASS lcl_transferrule IMPLEMENTATION.
 
 ENDCLASS.
 
+CLASS lcl_thousandrule DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_rule.
+    ALIASES isvalid FOR lif_rule~isvalid.
+    ALIASES say FOR lif_rule~say.
+ENDCLASS.
+
+CLASS lcl_thousandrule IMPLEMENTATION.
+
+  METHOD lif_rule~isvalid.
+    r_result = boolc( iv_input MOD 21 = 0 ).
+  ENDMETHOD.
+
+  METHOD lif_rule~say.
+    rv_output = `Thousand`.
+  ENDMETHOD.
+
+ENDCLASS.
+
 CLASS lcl_fizzbuzz03 DEFINITION.
   PUBLIC SECTION.
     TYPES: tt_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
@@ -259,7 +278,7 @@ CLASS ltcl_fizzbuzz03 IMPLEMENTATION.
     r_result = NEW lcl_fizzbuzz03( ).
     lt_rule = VALUE #(  ( NEW lcl_fizzbuzzwowrule( ) )
                         ( NEW lcl_buzzwowrule( ) )
-                        ( NEW lcl_fizzwowrule( ) )
+                        ( NEW lcl_thousandrule( ) )
                         ( NEW lcl_transferrule( ) )
                         ( NEW lcl_wowrule( ) )
                         ( NEW lcl_buzzrule( ) )
