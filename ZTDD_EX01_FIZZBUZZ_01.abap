@@ -72,6 +72,9 @@ CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals(
       exp = `Fizz`
       act = lo_fb->say( 3 ) ).
+    cl_abap_unit_assert=>assert_equals(
+      exp = `Fizz`
+      act = lo_fb->say( 6 ) ).
   ENDMETHOD.
 
   METHOD get_buzz_when_multiple_of_5.
