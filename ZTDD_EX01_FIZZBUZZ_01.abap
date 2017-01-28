@@ -20,7 +20,7 @@ ENDCLASS.
 CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD say.
-    IF iv_input = 15.
+    IF iv_input MOD 15 = 0.
       rv_output = `FizzBuzz`.
       RETURN.
     ENDIF.
@@ -97,6 +97,9 @@ CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals(
       exp = `FizzBuzz`
       act = lo_fb->say( 15 ) ).
+    cl_abap_unit_assert=>assert_equals(
+      exp = `FizzBuzz`
+      act = lo_fb->say( 30 ) ).
   ENDMETHOD.
 
 ENDCLASS.
