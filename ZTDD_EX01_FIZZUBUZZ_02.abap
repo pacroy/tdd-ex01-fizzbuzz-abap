@@ -18,6 +18,34 @@ INTERFACE lif_rule.
       VALUE(r_result) TYPE abap_bool.
 ENDINTERFACE.
 
+CLASS lcl_fizzrule DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_rule.
+    ALIASES isvalid FOR lif_rule~isvalid.
+ENDCLASS.
+
+CLASS lcl_fizzrule IMPLEMENTATION.
+
+  METHOD lif_rule~isvalid.
+    r_result = boolc( iv_input MOD 3 = 0 ).
+  ENDMETHOD.
+
+ENDCLASS.
+
+CLASS lcl_buzzrule DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_rule.
+    ALIASES isvalid FOR lif_rule~isvalid.
+ENDCLASS.
+
+CLASS lcl_buzzrule IMPLEMENTATION.
+
+  METHOD lif_rule~isvalid.
+    r_result = boolc( iv_input MOD 5 = 0 ).
+  ENDMETHOD.
+
+ENDCLASS.
+
 CLASS lcl_fizzbuzz01 DEFINITION.
   PUBLIC SECTION.
     METHODS say
