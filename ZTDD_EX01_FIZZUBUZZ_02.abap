@@ -10,6 +10,14 @@ REPORT ztdd_ex01_fizzubuzz_02.
 *----------------------------------------------------------------------*
 * PRODUCTION CODE
 *----------------------------------------------------------------------*
+INTERFACE lif_rule.
+  METHODS isvalid
+    IMPORTING
+      iv_input        TYPE i
+    RETURNING
+      VALUE(r_result) TYPE abap_bool.
+ENDINTERFACE.
+
 CLASS lcl_fizzbuzz01 DEFINITION.
   PUBLIC SECTION.
     METHODS say
@@ -38,7 +46,7 @@ CLASS lcl_fizzbuzz01 IMPLEMENTATION.
     IF isbuzzrule( iv_input ) = abap_true.
       rv_output = rv_output && `Buzz`.
     ENDIF.
-    IF rv_output is INITIAL.
+    IF rv_output IS INITIAL.
       rv_output = |{ iv_input }|.
     ENDIF.
   ENDMETHOD.
