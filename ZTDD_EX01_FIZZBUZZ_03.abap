@@ -17,6 +17,8 @@ INTERFACE lif_rule.
     RETURNING
       VALUE(r_result) TYPE abap_bool.
   METHODS say
+    IMPORTING
+      iv_input         TYPE i
     RETURNING
       VALUE(rv_output) TYPE string.
 ENDINTERFACE.
@@ -154,6 +156,25 @@ CLASS lcl_fizzbuzzwowrule IMPLEMENTATION.
 
 ENDCLASS.
 
+CLASS lcl_defaultrule DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_rule.
+    ALIASES isvalid FOR lif_rule~isvalid.
+    ALIASES say FOR lif_rule~say.
+ENDCLASS.
+
+CLASS lcl_defaultrule IMPLEMENTATION.
+
+  METHOD lif_rule~isvalid.
+    r_result = abap_true.
+  ENDMETHOD.
+
+  METHOD lif_rule~say.
+    rv_output = |{ iv_input }|.
+  ENDMETHOD.
+
+ENDCLASS.
+
 CLASS lcl_fizzbuzz03 DEFINITION.
   PUBLIC SECTION.
     TYPES: tt_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
@@ -174,13 +195,10 @@ CLASS lcl_fizzbuzz03 IMPLEMENTATION.
     CLEAR rv_output.
     LOOP AT at_rule INTO DATA(lo_rule).
       IF lo_rule->isvalid( iv_input ) = abap_true.
-        rv_output = lo_rule->say( ).
+        rv_output = lo_rule->say( iv_input ).
         RETURN.
       ENDIF.
     ENDLOOP.
-    IF rv_output IS INITIAL.
-      rv_output = |{ iv_input }|.
-    ENDIF.
   ENDMETHOD.
 
   METHOD set_rule.
@@ -224,7 +242,8 @@ CLASS ltcl_fizzbuzz03 IMPLEMENTATION.
                         ( NEW lcl_fizzbuzzrule( ) )
                         ( NEW lcl_wowrule( ) )
                         ( NEW lcl_buzzrule( ) )
-                        ( NEW lcl_fizzrule( ) ) ).
+                        ( NEW lcl_fizzrule( ) )
+                        ( NEW lcl_defaultrule( ) ) ).
     r_result->set_rule( lt_rule ).
   ENDMETHOD.
 
