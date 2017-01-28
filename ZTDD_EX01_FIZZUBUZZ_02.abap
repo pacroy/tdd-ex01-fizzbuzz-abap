@@ -69,7 +69,7 @@ ENDCLASS.
 CLASS lcl_wowrule IMPLEMENTATION.
 
   METHOD lif_rule~isvalid.
-    r_result = boolc( iv_input = 7 ).
+    r_result = boolc( iv_input MOD 7 = 0 ).
   ENDMETHOD.
 
   METHOD lif_rule~say.
