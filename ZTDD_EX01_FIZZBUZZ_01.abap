@@ -32,7 +32,7 @@ CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD say.
     IF ( isFizz( iv_input ) = abap_true ) AND ( isBuzz( iv_input ) = abap_true ).
-      rv_output = `FizzBuzz`.
+      rv_output = `Fizz` && `Buzz`.
       RETURN.
     ENDIF.
     IF isBuzz( iv_input ) = abap_true.
