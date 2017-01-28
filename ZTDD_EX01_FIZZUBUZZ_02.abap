@@ -16,12 +16,16 @@ INTERFACE lif_rule.
       iv_input        TYPE i
     RETURNING
       VALUE(r_result) TYPE abap_bool.
+  METHODS say
+    RETURNING
+      VALUE(rv_output) TYPE string.
 ENDINTERFACE.
 
 CLASS lcl_fizzrule DEFINITION.
   PUBLIC SECTION.
     INTERFACES lif_rule.
     ALIASES isvalid FOR lif_rule~isvalid.
+    ALIASES say FOR lif_rule~say.
 ENDCLASS.
 
 CLASS lcl_fizzrule IMPLEMENTATION.
@@ -30,18 +34,27 @@ CLASS lcl_fizzrule IMPLEMENTATION.
     r_result = boolc( iv_input MOD 3 = 0 ).
   ENDMETHOD.
 
+  METHOD lif_rule~say.
+    rv_output = `Fizz`.
+  ENDMETHOD.
+
 ENDCLASS.
 
 CLASS lcl_buzzrule DEFINITION.
   PUBLIC SECTION.
     INTERFACES lif_rule.
     ALIASES isvalid FOR lif_rule~isvalid.
+    ALIASES say FOR lif_rule~say.
 ENDCLASS.
 
 CLASS lcl_buzzrule IMPLEMENTATION.
 
   METHOD lif_rule~isvalid.
     r_result = boolc( iv_input MOD 5 = 0 ).
+  ENDMETHOD.
+
+  METHOD lif_rule~say.
+    rv_output = `Buzz`.
   ENDMETHOD.
 
 ENDCLASS.
@@ -61,10 +74,10 @@ CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
     CLEAR rv_output.
     IF lo_fizz->isvalid( iv_input ) = abap_true.
-      rv_output = rv_output && `Fizz`.
+      rv_output = rv_output && lo_fizz->say( ).
     ENDIF.
     IF lo_buzz->isvalid( iv_input ) = abap_true.
-      rv_output = rv_output && `Buzz`.
+      rv_output = rv_output && lo_buzz->say( ).
     ENDIF.
     IF rv_output IS INITIAL.
       rv_output = |{ iv_input }|.
