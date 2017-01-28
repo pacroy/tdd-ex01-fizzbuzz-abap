@@ -189,6 +189,9 @@ CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals(
       exp = `Wow`
       act = lo_fb->say( 7 ) ).
+    cl_abap_unit_assert=>assert_equals(
+      exp = `Wow`
+      act = lo_fb->say( 14 ) ).
   ENDMETHOD.
 
 ENDCLASS.
