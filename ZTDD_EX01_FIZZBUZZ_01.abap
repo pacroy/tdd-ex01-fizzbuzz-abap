@@ -20,6 +20,10 @@ ENDCLASS.
 CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD say.
+    IF iv_input = 5.
+      rv_output = `Buzz`.
+      RETURN.
+    ENDIF.
     IF iv_input = 3.
       rv_output = `Fizz`.
       RETURN.
