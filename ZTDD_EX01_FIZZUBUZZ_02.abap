@@ -59,6 +59,25 @@ CLASS lcl_buzzrule IMPLEMENTATION.
 
 ENDCLASS.
 
+CLASS lcl_wowrule DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_rule.
+    ALIASES isvalid FOR lif_rule~isvalid.
+    ALIASES say FOR lif_rule~say.
+ENDCLASS.
+
+CLASS lcl_wowrule IMPLEMENTATION.
+
+  METHOD lif_rule~isvalid.
+    r_result = boolc( iv_input = 7 ).
+  ENDMETHOD.
+
+  METHOD lif_rule~say.
+    rv_output = `Wow`.
+  ENDMETHOD.
+
+ENDCLASS.
+
 CLASS lcl_fizzbuzz01 DEFINITION.
   PUBLIC SECTION.
     TYPES: tt_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
@@ -120,7 +139,8 @@ CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
 
     r_result = NEW lcl_fizzbuzz01( ).
     lt_rule = VALUE #( ( NEW lcl_fizzrule( ) )
-                       ( NEW lcl_buzzrule( ) ) ).
+                       ( NEW lcl_buzzrule( ) )
+                       ( NEW lcl_wowrule( ) ) ).
     r_result->set_rule( lt_rule ).
   ENDMETHOD.
 
