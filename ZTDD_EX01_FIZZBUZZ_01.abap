@@ -42,7 +42,8 @@ CLASS ltcl_fizzbuzz01 DEFINITION FINAL FOR TESTING
         VALUE(r_result) TYPE REF TO lcl_fizzbuzz01.
     METHODS:
       get_number_when_not_multiple FOR TESTING RAISING cx_static_check,
-      get_fizz_when_multiple_of_3 FOR TESTING RAISING cx_static_check.
+      get_fizz_when_multiple_of_3 FOR TESTING RAISING cx_static_check,
+      get_buzz_when_multiple_of_5 FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
@@ -67,6 +68,13 @@ CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals(
       exp = `Fizz`
       act = lo_fb->say( 3 ) ).
+  ENDMETHOD.
+
+  METHOD get_buzz_when_multiple_of_5.
+    DATA(lo_fb) = get_new_fizzbuzz01( ).
+    cl_abap_unit_assert=>assert_equals(
+      exp = `Buzz`
+      act = lo_fb->say( 5 ) ).
   ENDMETHOD.
 
 ENDCLASS.
