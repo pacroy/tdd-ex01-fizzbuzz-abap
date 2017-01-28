@@ -38,13 +38,14 @@ CLASS ltcl_fizzbuzz01 DEFINITION FINAL FOR TESTING
 
   PRIVATE SECTION.
     METHODS:
-      first_test FOR TESTING RAISING cx_static_check.
+      get_number_when_not_multiple FOR TESTING RAISING cx_static_check,
+      get_fizz_when_multiple_of_3 FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
 CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
 
-  METHOD first_test.
+  METHOD get_number_when_not_multiple.
     DATA(lo_fb) = NEW lcl_fizzbuzz01( ).
     cl_abap_unit_assert=>assert_equals(
       exp = `1`
@@ -52,6 +53,10 @@ CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals(
       exp = `2`
       act = lo_fb->say( 2 ) ).
+  ENDMETHOD.
+
+  METHOD get_fizz_when_multiple_of_3.
+    DATA(lo_fb) = NEW lcl_fizzbuzz01( ).
     cl_abap_unit_assert=>assert_equals(
       exp = `Fizz`
       act = lo_fb->say( 3 ) ).
