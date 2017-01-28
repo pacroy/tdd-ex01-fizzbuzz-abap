@@ -20,11 +20,11 @@ ENDCLASS.
 CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD say.
-    IF iv_input mod 5 = 0.
+    IF iv_input MOD 5 = 0.
       rv_output = `Buzz`.
       RETURN.
     ENDIF.
-    IF iv_input mod 3 = 0.
+    IF iv_input MOD 3 = 0.
       rv_output = `Fizz`.
       RETURN.
     ENDIF.
@@ -47,7 +47,8 @@ CLASS ltcl_fizzbuzz01 DEFINITION FINAL FOR TESTING
     METHODS:
       get_number_when_not_multiple FOR TESTING RAISING cx_static_check,
       get_fizz_when_multiple_of_3 FOR TESTING RAISING cx_static_check,
-      get_buzz_when_multiple_of_5 FOR TESTING RAISING cx_static_check.
+      get_buzz_when_multiple_of_5 FOR TESTING RAISING cx_static_check,
+      get_fizzbuzz_on_multiple_of_15 FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
@@ -85,6 +86,13 @@ CLASS ltcl_fizzbuzz01 IMPLEMENTATION.
     cl_abap_unit_assert=>assert_equals(
       exp = `Buzz`
       act = lo_fb->say( 10 ) ).
+  ENDMETHOD.
+
+  METHOD get_fizzbuzz_on_multiple_of_15.
+    DATA(lo_fb) = get_new_fizzbuzz01( ).
+    cl_abap_unit_assert=>assert_equals(
+      exp = `FizzBuzz`
+      act = lo_fb->say( 15 ) ).
   ENDMETHOD.
 
 ENDCLASS.
