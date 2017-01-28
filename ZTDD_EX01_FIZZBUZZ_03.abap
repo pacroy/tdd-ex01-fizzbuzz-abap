@@ -175,6 +175,25 @@ CLASS lcl_defaultrule IMPLEMENTATION.
 
 ENDCLASS.
 
+CLASS lcl_transferrule DEFINITION.
+  PUBLIC SECTION.
+    INTERFACES lif_rule.
+    ALIASES isvalid FOR lif_rule~isvalid.
+    ALIASES say FOR lif_rule~say.
+ENDCLASS.
+
+CLASS lcl_transferrule IMPLEMENTATION.
+
+  METHOD lif_rule~isvalid.
+    r_result = boolc( iv_input MOD 15 = 0 ).
+  ENDMETHOD.
+
+  METHOD lif_rule~say.
+    rv_output = `Transfer`.
+  ENDMETHOD.
+
+ENDCLASS.
+
 CLASS lcl_fizzbuzz03 DEFINITION.
   PUBLIC SECTION.
     TYPES: tt_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
@@ -240,7 +259,7 @@ CLASS ltcl_fizzbuzz03 IMPLEMENTATION.
     lt_rule = VALUE #(  ( NEW lcl_fizzbuzzwowrule( ) )
                         ( NEW lcl_buzzwowrule( ) )
                         ( NEW lcl_fizzwowrule( ) )
-                        ( NEW lcl_fizzbuzzrule( ) )
+                        ( NEW lcl_transferrule( ) )
                         ( NEW lcl_wowrule( ) )
                         ( NEW lcl_buzzrule( ) )
                         ( NEW lcl_fizzrule( ) )
