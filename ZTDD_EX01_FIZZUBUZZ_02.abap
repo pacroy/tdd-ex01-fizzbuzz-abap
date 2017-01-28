@@ -69,16 +69,16 @@ ENDCLASS.
 CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD say.
-    DATA(lo_fizz) = NEW lcl_fizzrule( ).
-    DATA(lo_buzz) = NEW lcl_buzzrule( ).
+    DATA lt_rule TYPE STANDARD TABLE OF REF TO lif_rule WITH EMPTY KEY.
+    lt_rule = VALUE #( ( NEW lcl_fizzrule( ) )
+                       ( NEW lcl_buzzrule( ) ) ).
 
     CLEAR rv_output.
-    IF lo_fizz->isvalid( iv_input ) = abap_true.
-      rv_output = rv_output && lo_fizz->say( ).
-    ENDIF.
-    IF lo_buzz->isvalid( iv_input ) = abap_true.
-      rv_output = rv_output && lo_buzz->say( ).
-    ENDIF.
+    LOOP AT lt_rule INTO DATA(lo_rule).
+      IF lo_rule->isvalid( iv_input ) = abap_true.
+        rv_output = rv_output && lo_rule->say( ).
+      ENDIF.
+    ENDLOOP.
     IF rv_output IS INITIAL.
       rv_output = |{ iv_input }|.
     ENDIF.
