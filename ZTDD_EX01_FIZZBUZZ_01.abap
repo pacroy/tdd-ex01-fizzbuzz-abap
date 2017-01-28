@@ -20,7 +20,7 @@ ENDCLASS.
 CLASS lcl_fizzbuzz01 IMPLEMENTATION.
 
   METHOD say.
-    rv_output = `1`.
+    rv_output = |{ iv_input }|.
   ENDMETHOD.
 
 ENDCLASS.
