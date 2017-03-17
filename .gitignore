@@ -1,0 +1,6 @@
+*.csv
+*.xlsx
+*.jar
+*.txt
+.project
+report/
